@@ -17,12 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/tasks', 'TaskController@index')->name('tasks.index');
+Route::get('/albums', 'AlbumController@index')->name('albums.index');
 
-Route::post('/tasks', 'TaskController@store')->name('tasks.store');
+Route::post('/albums', 'AlbumController@store')->name('albums.store');
 
-Route::get('/tasks/{task}', 'TaskController@show')->name('tasks.show');
+Route::get('/albums/{album}', 'AlbumController@show')->name('albums.show');
 
-Route::put('/tasks/{task}', 'TaskController@update')->name('tasks.update');
+Route::put('/albums/{album}', 'AlbumController@update')->name('albums.update');
 
-Route::delete('/tasks/{task}', 'TaskController@destroy')->name('tasks.destroy');
+Route::delete('/albums/{album}', 'AlbumController@destroy')->name('albums.destroy');
