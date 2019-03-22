@@ -36,18 +36,19 @@ class AlbumController extends Controller
      */
 
     public function store(Request $request) {
-
+        \Log::info("In function store");
         $request->validate([
-            'album_cover'=>'nullable',
+            'album_cover'=>'required',
             'artist'=>'required',
             'album'=>'required',
-            'genre'=>'required|alpha',
+            'genre'=>'required|string',
             'production_year' =>'required|integer',
             'record_label'=>'required',
-            'tracklist' =>'nullable',
-            'rating' =>'nullable|numeric|between:0,10'
+            'tracklist' =>'required',
+            'rating' =>'required|numeric|between:0,10'
         ]);
 
+        \Log::info(Album::all());
         $album = Album::create($request->all());
         return response()->json([
             'message' => 'Great Success, the album was created',
@@ -89,15 +90,12 @@ class AlbumController extends Controller
         $request->validate([
             'album_cover'=>'nullable',
             'artist'=>'nullable',
-            'album'=>'nullable|',
+            'album'=>'nullable',
             'genre'=>'nullable',
             'production_year' =>'nullable',
             'record_label'=>'nullable',
             'tracklist' =>'nullable',
             'rating' =>'nullable',
-            'album_cover'=>'nullable',
-            'tracklist' =>'nullable',
-            'rating' =>'nullable'
         ]);
 
         $album->update($request->all());

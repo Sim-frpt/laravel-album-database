@@ -3,12 +3,10 @@
 namespace Tests\Feature;
 
 use App\Album;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
-class AlbumTest extends TestCase
+class TaskTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -33,15 +31,15 @@ class AlbumTest extends TestCase
             'album' => 'This is an album',
             'genre' => 'This is a music genre',
             'production_year' => 1999,
-            'record_label' => 'This is a record label',
+            'record_label' => 'This is a record_label',
             'tracklist' => 'This is a tracklist',
-            'rating' => 9.9
+            'rating' => 8.2
         ]);
 
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('albums', [
-            'album_cover' => 'This is an album cover',
+            'album_cover' => 'This is an album cover'
         ]);
 
         $response->assertJsonStructure([
@@ -54,7 +52,10 @@ class AlbumTest extends TestCase
                 'production_year',
                 'record_label',
                 'tracklist',
-                'rating'
+                'rating',
+                'updated_at',
+                'created_at',
+                'id'
             ]
         ]);
     }
@@ -68,9 +69,9 @@ class AlbumTest extends TestCase
             'album' => 'This is an album',
             'genre' => 'This is a music genre',
             'production_year' => 1999,
-            'record_label' => 'This is a record label',
+            'record_label' => 'This is a record_label',
             'tracklist' => 'This is a tracklist',
-            'rating' => 9.9
+            'rating' => 8.2
         ]);
 
         $album = Album::all()->first();
@@ -91,15 +92,15 @@ class AlbumTest extends TestCase
             'album' => 'This is an album',
             'genre' => 'This is a music genre',
             'production_year' => 1999,
-            'record_label' => 'This is a record label',
+            'record_label' => 'This is a record_label',
             'tracklist' => 'This is a tracklist',
-            'rating' => 9.9
+            'rating' => 8.2
         ]);
 
         $album = Album::all()->first();
 
         $response = $this->put(route('albums.update', $album->id), [
-            'album_cover' => 'This is an updated album cover'
+            'album_cover' => 'This is an updated album cover',
         ]);
 
         $response->assertStatus(200);
@@ -127,7 +128,7 @@ class AlbumTest extends TestCase
     }
 
     /** @test */
-    public function it_will_delete_an_album()
+    public function it_will_delete_a_task()
     {
         $this->post(route('albums.store'), [
             'album_cover' => 'This is an album cover',
@@ -135,9 +136,9 @@ class AlbumTest extends TestCase
             'album' => 'This is an album',
             'genre' => 'This is a music genre',
             'production_year' => 1999,
-            'record_label' => 'This is a record label',
+            'record_label' => 'This is a record_label',
             'tracklist' => 'This is a tracklist',
-            'rating' => 9.9
+            'rating' => 8.2
         ]);
 
         $album = Album::all()->first();

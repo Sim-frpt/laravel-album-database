@@ -22,7 +22,7 @@ class CreateAlbumsTable extends Migration
             $table->year('production_year');
             $table->string('record_label');
             $table->text('tracklist');
-            $table->unsignedDecimal('rating',2,1);
+            $table->unsignedDecimal('rating');
             $table->timestamps();
         });
     }
