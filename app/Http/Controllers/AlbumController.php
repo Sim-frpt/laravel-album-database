@@ -35,8 +35,8 @@ class AlbumController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request) {
-        // \Log::info("In function store");
+    public function store(Request $request)
+    {
         $request->validate([
             'album_cover'=>'required',
             'artist'=>'required',
@@ -48,7 +48,6 @@ class AlbumController extends Controller
             'rating' =>'required|numeric|between:0,10'
         ]);
 
-        // \Log::info(Album::all());
         $album = Album::create($request->all());
         return response()->json([
             'message' => 'Great Success, the album was created',
@@ -115,15 +114,12 @@ class AlbumController extends Controller
     {
         $album->delete();
         return response()->json([
-            'message' => 'Great success! Album was deleted'
+            'message' => 'Great success! This album was deleted'
         ]);
     }
 
-    public function findName($name) {
-        // if (! isset($name)) {
-        //     abort(404);
-        // }
-
+    public function findName($name)
+    {
         $album = Album::where('artist', 'like', '%' . $name . '%')
             ->orWhere('album', 'like', '%' . $name . '%' )
             ->orWhere('genre', 'like', '%' . $name . '%')

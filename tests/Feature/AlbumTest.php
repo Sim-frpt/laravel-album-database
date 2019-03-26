@@ -6,7 +6,7 @@ use App\Album;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class TaskTest extends TestCase
+class AlbumTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -20,6 +20,7 @@ class TaskTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson($albums->toArray());
+
     }
 
     /** @test */
@@ -31,11 +32,10 @@ class TaskTest extends TestCase
             'album' => 'This is an album',
             'genre' => 'This is a music genre',
             'production_year' => 1999,
-            'record_label' => 'This is a record_label',
+            'record_label' => 'This is a record label',
             'tracklist' => 'This is a tracklist',
             'rating' => 8.2
         ]);
-
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('albums', [
