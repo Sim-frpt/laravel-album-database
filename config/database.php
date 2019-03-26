@@ -5,7 +5,7 @@ $database = "forge";
 $username = "forge";
 $password = "";
 
-if(env("APP_ENV") == "production") {
+if(getenv("APP_ENV") == "production") {
     $dbInfo = parse_url(getenv("DATABASE_URL"));
     $host = $dbInfo['host'];
     $port = $dbInfo['port'];
