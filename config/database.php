@@ -1,5 +1,19 @@
 <?php
+$host = "localhost";
+$port = 5432;
+$database = "forge";
+$username = "forge";
+$password = "";
 
+if(env("APP_ENV") == "production") {
+    $dbInfo = parse_url(getenv("DATABASE_URL"));
+    $host = $dbInfo['host'];
+    $port = $dbInfo['port'];
+    $username = $dbInfo['user'];
+    $pasword = $dbInfo['password'];
+    $database = ltrim($dbInfo["path"], "/");
+
+}
 return [
 
     /*
